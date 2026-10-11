@@ -242,6 +242,7 @@ function updateNav(){
   sub.querySelectorAll('.fp-sub-btn').forEach(b=>b.onclick=()=>openTab(b.dataset.t));
   const dot=$('fpHomeDot');if(dot)dot.style.display=giftAvailable()?'block':'none';
 }
+const HOOKS={home:[],summary:[]};
 const _openTab=window.openTab;
 window.openTab=function(id){
   curTab=id;_openTab(id);
@@ -329,6 +330,7 @@ function renderHome(){
     ${d.plan?`<div class="fp-wod-done">✅ ${L('Выполнено сегодня','Completed today')}</div>`:`<div class="fp-wod-bonus">+${60+LVI()*20} XP ${L('бонус за выполнение','completion bonus')}</div>`}
   </div>
 
+  <div id="fpPlusHome"></div>
   <div class="fp-grid2">
     <div class="fp-card fp-gift${giftAvailable()?' ready':''}" id="fpGiftCard">
       <div class="fp-gift-ico">${giftAvailable()?'🎁':'✅'}</div>
@@ -359,6 +361,7 @@ function renderHome(){
   $('fpGiftCard').onclick=()=>giftAvailable()?openGift():toast(L('🎁 Новый подарок будет завтра','🎁 Next gift tomorrow'));
   $('fpPathMini').onclick=()=>openTab('path');
   renderHeaderStats();
+  HOOKS.home.forEach(f=>{try{f($('fpPlusHome'));}catch(e){console.error(e);}});
 }
 
 // ───────────────────────── ПОДАРОК ДНЯ ─────────────────────────
@@ -623,6 +626,7 @@ function showSummary(sess,g){
   // Кольца
   const v=ringVals();
   if(v.pm>=1&&v.pt>=1&&v.px>=1&&!P.claims[todayKey()]){P.claims[todayKey()]=1;saveP();addXP(50);extra.push(`💫 ${L('Все кольца закрыты!','All rings closed!')} <b>+50 XP</b>`);}
+  HOOKS.summary.forEach(f=>{try{f(extra,sess,g);}catch(e){console.error(e);}});
   const xpG=sess?Math.max(0,Math.round(totalXP()-sess.xp0)):0;
   if(ratio===null)ratio=goalReps>0?Math.min(1,(reps||Math.floor(sess?.plank||0))/goalReps):1;
   const [gr,gc]=grade(ratio);
@@ -723,5 +727,5 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{bootQuiet=false;},300);
 });
 // для отладки/тестов
-window.FP={get P(){return P;},startGuided,dailyPlan,nodePlan,showSummary,ringVals,get G(){return G;}};
+window.FP={HOOKS,L,esc,sheet,closeSheet,saveP,day,todayKey,keyOffset,ringsSVG,renderHome,get curTab(){return curTab;},get P(){return P;},startGuided,dailyPlan,nodePlan,showSummary,ringVals,get G(){return G;}};
 })();

@@ -5,12 +5,12 @@
 //  Push-уведомления с расписанием напоминаний
 // ============================================================
 
-const CACHE_STATIC = 'fp-static-v7';
-const CACHE_CDN    = 'fp-cdn-v7';
+const CACHE_STATIC = 'fp-static-v8';
+const CACHE_CDN    = 'fp-cdn-v8';
 
 const STATIC_ASSETS = [
   './', './index.html', './style.css', './script.js',
-  './db.js', './cloud.js', './pulse.js', './pulse.css', './manifest.json',
+  './db.js', './cloud.js', './pulse.js', './pulse-plus.js', './pulse.css', './manifest.json',
   './icon-192.png', './icon-512.png', './favicon.ico'
 ];
 

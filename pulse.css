@@ -30,7 +30,8 @@
 .fp-hstats{margin-left:auto;margin-right:8px;display:flex;gap:6px;align-items:center;border:1px solid var(--border);background:var(--card);border-radius:14px;padding:7px 10px;color:var(--text);font:800 .78rem Inter,sans-serif;cursor:pointer;}
 .fp-hs-fire{filter:grayscale(1);opacity:.7}.fp-hs-fire.hot{filter:none;opacity:1}
 .fp-hs-lvl{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:2px 7px;border-radius:8px;}
-@media(max-width:420px){.logo-text{display:none}.fp-hs-sh{display:none}}
+@media(max-width:420px){.fp-hs-sh{display:none}#shareBtn{display:none}.logo-text{font-size:1.2rem}.fp-hstats{margin-right:6px;padding:7px 8px}}
+@media(max-width:350px){.logo-text{display:none}}
 
 /* ── Общие ── */
 .fp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;backdrop-filter:blur(20px);margin-bottom:12px;position:relative;overflow:hidden;}
@@ -219,3 +220,65 @@
 
 #tab-profile #dayStreakBanner{margin-top:12px}
 .fp-title-badge{display:inline-block;margin-top:4px;font:800 .68rem Inter,sans-serif;padding:3px 8px;border-radius:8px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#1a1033}
+
+/* ============ FitPulse 2.1 «Пульс+» ============ */
+/* Пульсик */
+.fpp-pet{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--card)),var(--card))}
+.fpp-pet-stage{position:relative;width:86px;flex-shrink:0;text-align:center}
+.fpp-pet-e{font-size:3.6rem;cursor:pointer;display:inline-block;animation:fppIdle 2.4s ease-in-out infinite;user-select:none;filter:drop-shadow(0 6px 14px var(--glow))}
+.mood-happy .fpp-pet-e{animation-duration:1.4s}
+.mood-sad .fpp-pet-e{animation:fppSad 3.5s ease-in-out infinite;filter:grayscale(.45)}
+.fpp-pet-e.jump{animation:fppJump .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes fppIdle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04,.97)}}
+@keyframes fppSad{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg) translateY(2px)}}
+@keyframes fppJump{0%{transform:scale(1)}30%{transform:translateY(-26px) scale(.9,1.12)}60%{transform:translateY(0) scale(1.15,.88)}100%{transform:none}}
+.fpp-pet-shadow{width:52px;height:8px;margin:2px auto 0;border-radius:50%;background:rgba(0,0,0,.35);filter:blur(2px)}
+.fpp-pet-info{flex:1;min-width:0}
+.fpp-pet-name{font:900 1.05rem Inter,sans-serif;cursor:pointer}.fpp-pet-name small{font:600 .72rem Inter,sans-serif;color:var(--text2)}
+.fpp-pet-bubble{position:relative;margin:7px 0 4px;background:rgba(255,255,255,.1);border-radius:12px;padding:7px 10px;font-size:.78rem;line-height:1.35}
+.fpp-pet-next{font-size:.68rem;color:var(--text2);margin-top:5px}
+.fpp-heart{position:absolute;top:10px;font-size:1.3rem;pointer-events:none;animation:fppHeart 1s ease-out forwards}
+@keyframes fppHeart{to{transform:translateY(-60px) scale(1.4);opacity:0}}
+/* Итоги месяца */
+.fpp-wrap-card{display:flex;gap:12px;align-items:center;cursor:pointer;background:linear-gradient(120deg,#7c3aed,#db2777 55%,#f59e0b);border:0;color:#fff}
+.fpp-wc-e{font-size:2rem}.fpp-wc-t{font:900 1rem Inter,sans-serif}.fpp-wc-s{font-size:.74rem;opacity:.9;margin-top:2px}
+.fpp-wc-go{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.fpp-story{position:fixed;inset:0;z-index:9600;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .5s;user-select:none}
+.fpp-bars{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;right:12px;display:flex;gap:4px}
+.fpp-bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}
+.fpp-bars i b{display:block;height:100%;width:0;background:#fff}
+.fpp-bars i.done b{width:100%}.fpp-bars i.cur b{animation:fppBar 4.5s linear forwards}
+@keyframes fppBar{to{width:100%}}
+.fpp-close{position:absolute;top:calc(26px + env(safe-area-inset-top));right:14px;background:rgba(0,0,0,.25);border:0;color:#fff;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer}
+.fpp-slide{text-align:center;padding:30px 24px;width:100%;max-width:460px;box-sizing:border-box;overflow-wrap:anywhere}
+.fpp-slide.in>*{animation:fpRise .6s both}.fpp-slide.in>*:nth-child(2){animation-delay:.12s}.fpp-slide.in>*:nth-child(3){animation-delay:.24s}.fpp-slide.in>*:nth-child(4){animation-delay:.36s}
+.fpp-sl-k{font:900 .8rem Inter,sans-serif;letter-spacing:.25em;opacity:.85}
+.fpp-sl-big{font:900 clamp(3rem,17vw,6rem) Inter,sans-serif;line-height:1;margin:14px 0 6px;text-transform:capitalize;text-shadow:0 10px 40px rgba(0,0,0,.25)}
+.fpp-sl-emoji{font-size:6rem;margin:14px 0 6px}
+.fpp-sl-t{font:800 1.4rem Inter,sans-serif}.fpp-sl-s{font-size:.95rem;opacity:.88;margin-top:14px}
+/* Бой с тенью */
+.fpp-ghost{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:12;display:none;align-items:center;gap:10px;padding:6px 12px;border-radius:30px;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);color:#fff;font:700 .78rem Inter,sans-serif;border:1px solid rgba(255,255,255,.15)}
+.fpp-ghost b{font-weight:900;font-size:.9rem}
+.fpp-ghost.lead b{color:#4ade80}.fpp-ghost.behind b{color:#f87171}.fpp-ghost.tie b{color:#facc15}
+.fpp-ghost.lead{box-shadow:0 0 18px rgba(74,222,128,.35)}
+/* Бит */
+.btn-sec.fpp-on{border-color:var(--primary);box-shadow:0 0 12px var(--glow)}
+/* Конструктор */
+.fpp-my-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--border)}
+.fpp-my-info{flex:1;min-width:0}.fpp-my-info b{display:block;font-size:.9rem}.fpp-my-info span{font-size:.74rem;color:var(--text2)}
+.fpp-my-go,.fpp-my-ed{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card2);color:var(--text);cursor:pointer;font-size:.95rem}
+.fpp-my-go{background:linear-gradient(135deg,var(--primary),var(--secondary));border:0;color:#fff}
+.fpp-my-empty{font-size:.8rem;color:var(--text2);line-height:1.45}
+.fpp-b-emo{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.fpp-b-emo button{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-size:1.2rem;cursor:pointer}
+.fpp-b-emo button.on{border-color:var(--primary);box-shadow:0 0 10px var(--glow)}
+.fpp-b-name{width:100%;text-align:left;margin-bottom:12px;font-weight:700}
+.fpp-b-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.fpp-b-step{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px}
+.fpp-b-sel{flex:1;min-width:0;text-align:left}
+.fpp-b-num{display:flex;align-items:center;gap:6px}
+.fpp-b-num button{width:30px;height:30px;border-radius:9px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-weight:900;cursor:pointer}
+.fpp-b-num b{min-width:34px;text-align:center;font-size:.85rem}
+.fpp-b-del{border:0;background:none;color:var(--text2);cursor:pointer;font-size:.9rem}
+.fpp-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-2px 0 12px}
+.fpp-chip{flex-shrink:0;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:30px;padding:9px 14px;font:700 .8rem Inter,sans-serif;cursor:pointer}
