@@ -8,7 +8,7 @@ FitPulse — это веб-приложение для тренировок с �
 
 🚀 Открыть приложение
 
-https://berserk364785.github.io/FitPulse/
+https://berserk364785.github.io/FitPulse-2.0/
 
 ---
 
