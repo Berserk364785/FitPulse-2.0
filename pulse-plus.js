@@ -297,6 +297,6 @@ const _openTab=window.openTab;
 window.openTab=function(id){_openTab(id);if(id==='programs')mountMy();};
 const _applyLanguage=window.applyLanguage;
 window.applyLanguage=function(l){_applyLanguage(l);const b=$('fppBeatBtn');if(b)b.textContent=(beatOn?'🎵 ':'🔇 ')+L('Бит','Beat');if($('fppMy'))mountMy();};
-window.addEventListener('load',()=>{mountBeatBtn();mountMy();});
+document.addEventListener('DOMContentLoaded',()=>{mountBeatBtn();mountMy();});
 window.FPP={openWrapped,openBuilder,monthStats,pet};
 })();

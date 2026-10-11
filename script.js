@@ -2571,7 +2571,8 @@ async function renderDuelPlayerList(){
 // ============================================================
 //  INIT
 // ============================================================
-window.onload=()=>{
+// Старт по DOMContentLoaded — не ждём шрифты и картинки, интерфейс появляется сразу
+document.addEventListener('DOMContentLoaded',()=>{
   captureReferralOnLoad();
   registerSW();
   setTheme(localStorage.getItem('fp_theme')||'violet');
@@ -2836,4 +2837,4 @@ window.onload=()=>{
 
   // ── Дуэли — инициализация ───────────────────────────────
   initDuels();
-};
+});

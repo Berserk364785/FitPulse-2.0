@@ -257,9 +257,9 @@ function renderHeaderStats(){
   let el=$('fpHStats');
   if(!el){
     el=document.createElement('button');el.id='fpHStats';el.className='fp-hstats';
-    el.onclick=()=>openTab('profile');
     document.querySelector('.app-header .logo')?.after(el);
   }
+  el.onclick=()=>openTab('profile');
   el.innerHTML=`<span class="fp-hs-fire${dayStreak>0?' hot':''}">🔥 ${dayStreak}</span><span class="fp-hs-sh">🛡️ ${P.shields}</span><span class="fp-hs-lvl">Lv ${lvl}</span>`;
 }
 
@@ -705,6 +705,7 @@ window.applyLanguage=function(lang){
 
 // ───────────────────────── ИНИЦИАЛИЗАЦИЯ ─────────────────────────
 function mountTabs(){
+  if($('tab-home'))return; // разметка 2.0 уже в index.html
   const app=document.querySelector('.app');
   const home=document.createElement('div');home.className='tab-content';home.id='tab-home';
   home.innerHTML='<div id="fpHomeHost"></div><div id="fpQuestHost"></div>';
@@ -717,8 +718,8 @@ function mountTabs(){
   const banner=$('dayStreakBanner'),prof=$('tab-profile');
   if(banner&&prof)prof.insertBefore(banner,prof.children[1]||null);
 }
-window.addEventListener('load',()=>{
-  // window.onload из script.js уже отработал (зарегистрирован раньше)
+document.addEventListener('DOMContentLoaded',()=>{
+  // старт script.js уже отработал (зарегистрирован раньше)
   mountTabs();buildNav();buildThemeGrid();
   const want=new URLSearchParams(location.search).get('tab');
   openTab(want&&$('tab-'+want)?want:'home');

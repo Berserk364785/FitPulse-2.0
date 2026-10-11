@@ -76,6 +76,7 @@
   <link rel="stylesheet" href="pulse.css">
 </head>
 <body class="theme-violet">
+<script>try{document.body.className='theme-'+(localStorage.getItem('fp_theme')||'violet');}catch(e){}</script>
 
 <!-- ONBOARDING — многошаговый -->
 <div id="onboardOv" class="onboard-ov">
@@ -170,6 +171,7 @@
       <div class="logo-icon">💪</div>
       <div class="logo-text">FitPulse</div>
     </div>
+    <button class="fp-hstats" id="fpHStats"></button>
     <div class="header-actions">
       <button class="icon-btn" id="themeBtn" title="Тема">🎨</button>
       <button class="icon-btn" id="shareBtn" title="Поделиться">📤</button>
@@ -186,21 +188,14 @@
     <button class="tab-btn" data-tab="programs" data-i18n="tabPrograms">📋 Программы</button>
     <button class="tab-btn" data-tab="community" data-i18n="tabCommunity">🏆 Рейтинг</button>
   </div>
+  <div id="fpSubnav" class="fp-subnav" style="display:none"></div>
 
-  <!-- ===== TAB: TRAIN ===== -->
-  <div class="tab-content active" id="tab-train">
-
-    <!-- Day streak i18n patch applied below -->
-    <div class="day-streak-banner" id="dayStreakBanner">
-      <span class="day-streak-fire">🔥</span>
-      <div class="day-streak-text">
-        <div class="day-streak-num" id="dayStreakNum">0 дней</div>
-        <div class="day-streak-sub" data-i18n="streakDaysSub">подряд с тренировкой</div>
-      </div>
-    </div>
-
+  <!-- ===== TAB: HOME (FitPulse 2.0) ===== -->
+  <div class="tab-content active" id="tab-home">
+    <div id="fpHomeHost"><div class="fp-skel"><i style="height:58px"></i><i style="height:182px"></i><i style="height:300px"></i></div></div>
+    <div id="fpQuestHost" data-moved="1">
     <!-- Quests / Challenge -->
-    <div class="quest-block quest-type collapsed" id="questBlock">
+    <div class="quest-block quest-type" id="questBlock">
       <div class="quest-header-row" onclick="toggleQuest('questBlock')">
         <span class="quest-icon-big">📅</span>
         <div class="quest-title" data-i18n="questsTitle">Задания на сегодня</div>
@@ -211,7 +206,7 @@
       </div>
     </div>
 
-    <div class="quest-block challenge-type collapsed" id="challengeBlock">
+    <div class="quest-block challenge-type" id="challengeBlock">
       <div class="quest-header-row" onclick="toggleQuest('challengeBlock')">
         <span class="quest-icon-big">⚡</span>
         <div class="quest-title" data-i18n="challengeTitle">Вызов дня</div>
@@ -223,6 +218,12 @@
         <span class="quest-reward" id="challengeReward">+100 XP</span>
       </div>
     </div>
+
+    </div>
+  </div>
+
+  <!-- ===== TAB: TRAIN ===== -->
+  <div class="tab-content" id="tab-train">
 
     <!-- Exercise grid -->
     <div class="card">
@@ -346,6 +347,15 @@
         <div class="profile-stat"><div class="profile-stat-val" id="psTotalCal">0</div><div class="profile-stat-label" data-i18n="totalCal">Калорий</div></div>
         <div class="profile-stat"><div class="profile-stat-val" id="psMaxStreak">0</div><div class="profile-stat-label" data-i18n="maxStreak">Макс. серия</div></div>
         <div class="profile-stat"><div class="profile-stat-val" id="psLevel">1</div><div class="profile-stat-label" data-i18n="levelLabel">Уровень</div></div>
+      </div>
+    </div>
+
+    <!-- Day streak i18n patch applied below -->
+    <div class="day-streak-banner" id="dayStreakBanner">
+      <span class="day-streak-fire">🔥</span>
+      <div class="day-streak-text">
+        <div class="day-streak-num" id="dayStreakNum">0 дней</div>
+        <div class="day-streak-sub" data-i18n="streakDaysSub">подряд с тренировкой</div>
       </div>
     </div>
 
@@ -508,7 +518,11 @@
       <button class="m-btn ghost" id="forceUpdateBtn"data-i18n="updateApp">🔄 Обновить приложение</button>
     </div>
   </div>
+  <!-- ===== TAB: PATH (FitPulse 2.0) ===== -->
+  <div class="tab-content" id="tab-path"><div id="fpPathHost"></div></div>
 </div>
+
+<nav id="fpNav" class="fp-nav"></nav>
 
 <!-- CONFETTI -->
 <canvas id="confettiCanvas"></canvas>
@@ -688,6 +702,7 @@
 <script src="script.js"></script>
 <script src="pulse.js"></script>
 <script src="pulse-plus.js"></script>
+<script src="admin.js"></script>
 <!-- DUEL OVERLAY — поверх тренировки во время дуэли -->
 <div id="duelOverlay" style="display:none;position:fixed;top:0;left:0;right:0;z-index:800;pointer-events:none;">
   <div style="background:linear-gradient(135deg,rgba(10,5,25,.92),rgba(124,58,237,.25));padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(168,85,247,.4);">

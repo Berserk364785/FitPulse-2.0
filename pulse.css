@@ -12,7 +12,7 @@
 .fp-lock-hint{font-size:.62rem;color:var(--text2);margin-top:2px;}
 
 /* ── Навигация ── */
-.fp-ready .tab-bar{display:none;}
+.tab-bar{display:none!important;}
 .fp-nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));z-index:900;display:flex;gap:2px;padding:6px;width:min(560px,calc(100% - 20px));
   background:color-mix(in srgb,var(--bg2) 78%,transparent);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--border);border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.45);}
 .fp-nav-btn{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px 6px;border:0;background:none;color:var(--text2);font:600 .64rem Inter,sans-serif;border-radius:18px;cursor:pointer;transition:all .25s;}
@@ -282,3 +282,27 @@
 .fpp-b-del{border:0;background:none;color:var(--text2);cursor:pointer;font-size:.9rem}
 .fpp-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-2px 0 12px}
 .fpp-chip{flex-shrink:0;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:30px;padding:9px 14px;font:700 .8rem Inter,sans-serif;cursor:pointer}
+
+/* Скелетон главного экрана на первые миллисекунды */
+.fp-skel{display:flex;flex-direction:column;gap:12px}
+.fp-skel i{display:block;border-radius:var(--radius);background:linear-gradient(90deg,var(--card) 0%,var(--card2) 50%,var(--card) 100%);background-size:200% 100%;animation:fpSkel 1.2s infinite}
+@keyframes fpSkel{to{background-position:-200% 0}}
+.fp-nav:empty{display:none}
+
+/* ============ Админ-панель ============ */
+.fpa-hub{display:none}.fp-admin .fpa-hub{display:block}
+.fp-admin .logo{position:relative}
+.fp-admin .logo::after{content:'ADMIN';position:absolute;left:-4px;bottom:-8px;font:900 .5rem Inter,sans-serif;letter-spacing:.08em;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;padding:2px 5px;border-radius:6px}
+.fpa .fp-cta{margin-bottom:6px}
+.fpa-sec{font:800 .72rem Inter,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);margin:18px 0 8px}
+.fpa-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.fpa-row span{flex:1;font-size:.84rem}
+.fpa-row .inp{width:72px;text-align:center}
+.fpa-row button,.fpa-pets button,.fpa-themes button{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:10px 12px;font:700 .8rem Inter,sans-serif;cursor:pointer}
+.fpa-row button:active,.fpa-themes button:active{transform:scale(.96)}
+.fpa-themes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
+.fpa-themes button{color:#fff;border:0;text-shadow:0 1px 3px rgba(0,0,0,.5);padding:14px 6px}
+.fpa-pets{display:flex;gap:6px}
+.fpa-pets button{flex:1;font-size:1.5rem;padding:8px 0}
+.fpa-pets button.on{border-color:var(--primary);box-shadow:0 0 12px var(--glow)}
+.fpa-note{font-size:.7rem;color:var(--text2);margin-top:10px;line-height:1.4}
